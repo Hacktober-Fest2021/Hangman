@@ -12,6 +12,10 @@ body {
   font-family: 'Rubik', sans-serif;
   color: #fff;
   background-color: #233d4d;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .container {
