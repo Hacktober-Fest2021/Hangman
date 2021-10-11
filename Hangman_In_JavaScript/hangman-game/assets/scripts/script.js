@@ -27,7 +27,6 @@ async function randomWord(){
 // Select a word randomly from randomWord() method
 async function initializeWord() {
   selectedWord = await randomWord();
-  console.log(selectedWord);
   const noOfLetters = selectedWord.length;
   for (let i = 0; i < noOfLetters; i++) {
     const listItem = document.createElement('li');
