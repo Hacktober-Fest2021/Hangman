@@ -17,7 +17,7 @@ const correctLetters = [];
 // Incorrect letters typed by the player
 const incorrectLetters = [];
 
-// Returns randow word
+// Returns random word
 async function randomWord(){
   const data = await fetch(`https://random-words-api.vercel.app/word`);
   const res = await data.json(); 
@@ -26,7 +26,6 @@ async function randomWord(){
 }
 // Select a word randomly from randomWord() method
 async function initializeWord() {
-  // selectedWord = wordList[Math.floor(Math.random() * wordList.length)];
   selectedWord = await randomWord();
   console.log(selectedWord);
   const noOfLetters = selectedWord.length;
