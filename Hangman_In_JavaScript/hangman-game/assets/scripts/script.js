@@ -8,30 +8,6 @@ const playBtn = document.getElementById('play');
 const indication = document.getElementById('indication');
 const bodyParts = document.getElementsByClassName('body-part');
 
-// List of words
-const wordList = [
-  'market',
-  'knock',
-  'smite',
-  'windy',
-  'coin',
-  'throw',
-  'silence',
-  'bluff',
-  'downfall',
-  'climb',
-  'lying',
-  'weaver',
-  'snob',
-  'kickoff',
-  'match',
-  'coat',
-  'emerald',
-  'coherent',
-  'multiple',
-  'square',
-];
-
 // Word that is selected to play
 let selectedWord = null;
 // Stores the count of no.of incorrectly typed letters
@@ -41,9 +17,18 @@ const correctLetters = [];
 // Incorrect letters typed by the player
 const incorrectLetters = [];
 
-// Select a word randomly from wordList and initialize in the DOM
-function initializeWord() {
-  selectedWord = wordList[Math.floor(Math.random() * wordList.length)];
+// Returns randow word
+async function randomWord(){
+  const data = await fetch(`https://random-words-api.vercel.app/word`);
+  const res = await data.json(); 
+  const word = res[0].word.toLowerCase();
+  return word;
+}
+// Select a word randomly from randomWord() method
+async function initializeWord() {
+  // selectedWord = wordList[Math.floor(Math.random() * wordList.length)];
+  selectedWord = await randomWord();
+  console.log(selectedWord);
   const noOfLetters = selectedWord.length;
   for (let i = 0; i < noOfLetters; i++) {
     const listItem = document.createElement('li');
@@ -146,7 +131,7 @@ function check(ev) {
 }
 
 // Reset all variables and start a new game
-function startNewGame() {
+async function startNewGame() {
   selectedWord = null;
   incorrectCount = 0;
   correctLetters.splice(0);
@@ -158,7 +143,7 @@ function startNewGame() {
   incorrect.classList.remove('visible');
   backdrop.classList.remove('visible');
   finalMsg.classList.remove('visible');
-  initializeWord();
+  await initializeWord();
 }
 
 // Start the game
